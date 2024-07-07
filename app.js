@@ -17,6 +17,14 @@ app.use('/tokens', tokensRoute);
 app.use('/quotes', quotesRoute);
 app.use('/params', paramsRoute);
 
+app.get('/', (req, res) => {
+  res.send(`<center><h1 style="margin-top: 30px;">Bridge App Server</h1></center>`);
+});
+
+app.all('*', (req, res) => {
+  res.status(404).send('Sorry, this page does not exist.');
+});
+
 app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message });
 });
